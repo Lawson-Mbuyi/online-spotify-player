@@ -13,8 +13,7 @@ const reducer = (state, action) => {
     case "SET_TOKEN":
       return {
         ...state,
-        token:
-          "BQCAtfZq4-LLrJWnbXgGKXICIhXZM2Jhr3TOmhjI1iWpujEkEzuuIDTXo6phqq9a-wshbLjlHHyhlAzlaXjDOBLaQGXCqCPukd4wN0BrEymDxh0-bV6Pjsbf_gaPyICZBBMDhsM9IldowXoxxv-99Uj0xnb6RvUVpyu90NP5HLqsc_uACtCGUTihTVV81uRjzRsmOinqzbdXaFCufFaH6TDHss81wUwBZolCqkIEfGzdOB4wRwkhQzj3PQnpO4FD",
+        token: action.token,
       };
     case "SET_USER":
       return {

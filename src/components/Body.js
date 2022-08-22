@@ -48,7 +48,7 @@ export default function Body({ headerBackground }) {
   }, [token, dispatch, selectedPlaylistId]);
   const playTrack = async (id, name, artists, image, contextUri, trackNumber) => {
     const response = await axios.put(
-      `https://api.spotify.com/v1/me/player/play`,
+      "https://api.spotify.com/v1/me/player/play",
       {
         contextUri,
         offset: {
@@ -103,9 +103,6 @@ export default function Body({ headerBackground }) {
           </div>
           <div className="list">
             <div className="header-row">
-              <div className="col">
-                <span>#</span>
-              </div>
               <div className="col">
                 <span>TITLE</span>
               </div>
@@ -171,7 +168,7 @@ const Container = styled.div`
     .image {
       img {
         height: 15rem;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        box-shadow: #2f2e41;
       }
     }
     .details {
@@ -196,7 +193,7 @@ const Container = styled.div`
       padding: 1rem 3rem;
       transition: 0.3s ease-in-out;
       background-color: ${({ headerBackground }) =>
-        headerBackground ? "#000000dc" : "none"};
+        headerBackground ? "#2F2E41" : "none"};
     }
     .tracks {
       margin: 0 2rem;

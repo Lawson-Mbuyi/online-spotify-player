@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { MdHomeFilled, MdSearch } from "react-icons/md";
-import { IoLibrary } from "react-icons/io5";
 import Playlist from "./PlayList";
 
 export default function Sidebar() {
@@ -20,11 +19,10 @@ export default function Sidebar() {
           </li>
           <li>
             <MdSearch />
-            <span>Search</span>
+            <span>Recherche</span>
           </li>
           <li>
-            <IoLibrary />
-            <span>Your Library</span>
+            <span>Bibliothèque</span>
           </li>
         </ul>
       </div>
@@ -34,7 +32,7 @@ export default function Sidebar() {
 }
 
 const Container = styled.div`
-  background-color: black;
+  background-color: #2f2e41;
   color: #b3b3b3;
   display: flex;
   flex-direction: column;

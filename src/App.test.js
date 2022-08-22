@@ -1,4 +1,6 @@
+/* eslint-disable import/no-unresolved */
 import { render, screen } from "@testing-library/react";
+// eslint-disable-next-line import/extensions
 import App from "./App";
 
 test("renders learn react link", () => {

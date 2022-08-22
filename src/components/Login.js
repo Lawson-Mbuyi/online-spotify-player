@@ -45,14 +45,16 @@ export default function Login() {
 }
 
 const Content = styled.div`
-  width: 60vh;
-  heigth: 100vh;
+  padding: 60px;
+  width: 100%;
+  height: 100vh;
+  overflow-y: overlay;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(transparent, #2f2e41);
+  background: linear-gradient(transparent, #4F4C6B);
   background-color: rgb(91, 87, 115);
   gap: 2rem;
 
@@ -71,6 +73,7 @@ const Content = styled.div`
   }
   p {
     max-width: 428px;
+    min-width:350px;
     heigth: 125px;
     font-size: 20px;
     color white;
