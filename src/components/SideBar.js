@@ -1,16 +1,23 @@
 import styled from "styled-components";
 import { MdHomeFilled, MdSearch } from "react-icons/md";
+import Lottie from "react-lottie";
+import spotify from "./spotify.json";
 import Playlist from "./PlayList";
 
 export default function Sidebar() {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: spotify,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <Container>
       <div className="top__links">
         <div className="logo">
-          <img
-            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
-            alt="spotify"
-          />
+          <Lottie options={defaultOptions} height={200} max-width={190} />
         </div>
         <ul>
           <li>
@@ -32,7 +39,7 @@ export default function Sidebar() {
 }
 
 const Container = styled.div`
-  background-color: #2f2e41;
+  background-color: #4f4c6b;
   color: #b3b3b3;
   display: flex;
   flex-direction: column;
@@ -43,7 +50,6 @@ const Container = styled.div`
     flex-direction: column;
     .logo {
       text-align: center;
-      margin: 1rem 0;
       img {
         max-inline-size: 80%;
         block-size: auto;

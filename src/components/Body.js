@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { AiFillClockCircle } from "react-icons/ai";
 import { GetUserValue } from "../utilities/UserProvider";
 
-export default function Body({ headerBackground }) {
+export default function Body() {
   const [{ token, selectedPlaylist, selectedPlaylistId }, dispatch] = GetUserValue();
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export default function Body({ headerBackground }) {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
   return (
-    <Container headerBackground={headerBackground}>
+    <Container>
       {selectedPlaylist && (
         <>
           <div className="playlist">
@@ -160,6 +160,8 @@ export default function Body({ headerBackground }) {
 }
 
 const Container = styled.div`
+  width: 100%;
+  background-color: #2f2e41;
   .playlist {
     margin: 0 2rem;
     display: flex;

@@ -1,24 +1,78 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import { GetUserValue } from "../utilities/UserProvider";
 
-// eslint-disable-next-line react/prop-types
 export default function Navbar({ navBackground }) {
+  const [searchKey, setSearchKey] = useState("");
+  const [artists, setArtists] = useState([]);
+  const [{ token }, dispatch] = GetUserValue();
+
+  const searchArtists = async (e) => {
+    e.preventDefault();
+    const { data } = await axios.get("https://api.spotify.com/v1/search", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        q: searchKey,
+        type: "artist",
+      },
+    });
+    setArtists(data.artists.items);
+  };
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_TOKEN",
+      token,
+    });
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    searchArtists();
+  }, [searchKey]);
+
+  const renderArtists = () => {
+    return artists.map((artist) => (
+      <Data>
+        <div key={artist.id}>
+          {artist.images.length ? (
+            <img width="20%" src={artist.images[0].url} alt="" />
+          ) : (
+            <div>Pas d infos pour votre requette</div>
+          )}
+          <span>{artist.name}</span>
+        </div>
+      </Data>
+    ));
+  };
+
   const [{ userInfo }] = GetUserValue();
   return (
-    <Container navBackground={navBackground}>
-      <div className="search__bar">
-        <FaSearch />
-        <input type="text" placeholder="Artists, songs, or podcasts" />
-      </div>
-      <div className="avatar">
-        <a href={userInfo?.userUrl}>
-          <CgProfile />
-          <span>{userInfo?.name}</span>
-        </a>
-      </div>
-    </Container>
+    <>
+      <Container navBackground={navBackground}>
+        <div className="search__bar">
+          <form onSubmit={searchArtists}>
+            <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
+
+            <button type="submit">
+              <FaSearch />
+            </button>
+          </form>
+        </div>
+        <div className="avatar">
+          <a href={userInfo?.userUrl}>
+            <CgProfile />
+            <span>{userInfo?.name}</span>
+          </a>
+        </div>
+      </Container>
+      {searchKey ? renderArtists() : null}
+    </>
   );
 }
 
@@ -75,4 +129,16 @@ const Container = styled.div`
       }
     }
   }
+  .artists {
+    display
+  }
+  button {
+    width: 6Opx;
+    display: inline-block;
+    float: rigth;
+  }
+`;
+const Data = styled.p`
+  display: inline-flex;
+  width: 500 em;
 `;

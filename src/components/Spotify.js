@@ -94,7 +94,6 @@ const Container = styled.div`
         width: 0.7rem;
         max-height: 2rem;
         &-thumb {
-          background-color: rgba(255, 255, 255, 0.6);
         }
       }
     }
