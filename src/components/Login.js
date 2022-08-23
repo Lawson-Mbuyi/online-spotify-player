@@ -15,7 +15,7 @@ export default function Login() {
 
   const handleClick = async () => {
     const client_id = "4b4f1a9eeaf24cd688bf9fb8ce98411e";
-    const redirect_uri = "http://localhost:3000/callback/";
+    const redirect_uri = "https://online-spotify-player.vercel.app/callback/";
     const api_url = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
