@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import CurrentMusic from "./CurrentMusic";
 import MusicController from "./MusicController";
+import Volume from "./Volume";
 
 export default function Footer() {
   return (
     <Container>
       <CurrentMusic />
       <MusicController />
+      <Volume />
     </Container>
   );
 }

@@ -1,23 +1,25 @@
 import styled from "styled-components";
 import { MdHomeFilled, MdSearch } from "react-icons/md";
-import Lottie from "react-lottie";
-import spotify from "./spotify.json";
+// import Lottie from "react-lottie";
+// import spotify from "./spotify.json";
+import Star from "./Star.png";
 import Playlist from "./PlayList";
 
 export default function Sidebar() {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: spotify,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  // const defaultOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: spotify,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
   return (
     <Container>
       <div className="top__links">
+        <img src={Star} alt="logo" />
         <div className="logo">
-          <Lottie options={defaultOptions} height={200} max-width={190} />
+          {/* <Lottie options={defaultOptions} height={200} max-width={190} /> */}
         </div>
         <ul>
           <li>
@@ -39,7 +41,7 @@ export default function Sidebar() {
 }
 
 const Container = styled.div`
-  background-color: #4f4c6b;
+  background-color: #2f2e41;
   color: #b3b3b3;
   display: flex;
   flex-direction: column;
@@ -51,7 +53,7 @@ const Container = styled.div`
     .logo {
       text-align: center;
       img {
-        max-inline-size: 80%;
+        max-inline-size: 20%;
         block-size: auto;
       }
     }

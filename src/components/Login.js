@@ -2,6 +2,8 @@
 import styled from "styled-components";
 import Lottie from "react-lottie";
 import playing from "./playing.json";
+// eslint-disable-next-line import/no-cycle
+import Header from "./Header";
 
 export default function Login() {
   const defaultOptions = {
@@ -14,8 +16,10 @@ export default function Login() {
   };
 
   const handleClick = async () => {
-    const client_id = "4b4f1a9eeaf24cd688bf9fb8ce98411e";
-    const redirect_uri = "https://online-spotify-player.vercel.app/callback/";
+    const client_id = "ae8b66ff18714363903cfa63fbe6bce6";
+    const redirect_uri = "http://localhost:3000/callback/";
+    // const client_id = "4b4f1a9eeaf24cd688bf9fb8ce98411e";
+    // const redirect_uri = "https://online-spotify-player.vercel.app/callback/";
     const api_url = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
@@ -31,23 +35,31 @@ export default function Login() {
     )}&response_type=token&show_dialog=true`;
   };
   return (
-    <Content>
-      <p>
-        Toutes les musiques du monde avec tous les artistes de renommé mondiale c est ici
-        avec OPEN SPOTIFY
-      </p>
-      <button type="button" onClick={handleClick}>
-        Je me connecte
-      </button>
-      <Lottie options={defaultOptions} height={400} width={400} />
-    </Content>
+    <Container>
+      <Header />
+      <Content>
+        <p>
+          Toutes les musiques du monde avec tous les artistes de renommé mondiale c est
+          ici avec ONELINE-SPOTIFY-PLAYER
+        </p>
+        <button type="button" onClick={handleClick}>
+          Ouvrir
+        </button>
+        <Lottie options={defaultOptions} height={400} width={400} />
+      </Content>
+    </Container>
   );
 }
 
-const Content = styled.div`
-  padding: 60px;
+const Container = styled.nav`
   width: 100%;
-  height: 100vh;
+  heigth: 100vh;
+  background-color: #2f2e41;
+`;
+const Content = styled.div`
+  margin: 60px;
+  width: 65%;
+  height: 90vh;
   overflow-y: overlay;
   margin: auto;
   display: flex;
@@ -60,7 +72,7 @@ const Content = styled.div`
 
   img {
     height: 20vh;
-    min-width: 400px;
+    width: 400px;
   }
   button {
     padding: 1rem 3rem;
@@ -71,9 +83,17 @@ const Content = styled.div`
     font-size: 1.4rem;
     cursor: pointer;
   }
+  @media screen (and max-width:700px){
+    p {
+      max-width: 428px;
+      min-width: 250px;
+      font-size: 16px;
+      margin: 15px;
+      text-align: center;
+    }
+  }
   p {
     max-width: 428px;
-    min-width:350px;
     heigth: 125px;
     font-size: 20px;
     color white;

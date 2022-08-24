@@ -52,7 +52,7 @@ export default function Body() {
       {
         contextUri,
         offset: {
-          position: trackNumber - 1,
+          position: trackNumber + 1,
         },
         position_ms: 0,
       },
@@ -103,6 +103,9 @@ export default function Body() {
           </div>
           <div className="list">
             <div className="header-row">
+              <div className="col">
+                <span>N°</span>
+              </div>
               <div className="col">
                 <span>TITLE</span>
               </div>
@@ -161,7 +164,7 @@ export default function Body() {
 
 const Container = styled.div`
   width: 100%;
-  background-color: #2f2e41;
+  background: #4f4c6b;
   .playlist {
     margin: 0 2rem;
     display: flex;

@@ -14,7 +14,7 @@
   "plugins": ["react", "prettier"],
   "rules": {
     "quotes": [
-      "warn",
+      "off",
       "double",
       {
         "avoidEscape": true
