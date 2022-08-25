@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { GetUserValue } from "../utilities/UserProvider";
 
 export default function Navbar() {
-  const [searchKey, setSearchKey] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [artists, setArtists] = useState([]);
   const [{ token }, dispatch] = GetUserValue();
 
@@ -17,7 +17,7 @@ export default function Navbar() {
         Authorization: `Bearer ${token}`,
       },
       params: {
-        q: searchKey,
+        q: searchText,
         type: "artist",
       },
     });
@@ -33,7 +33,7 @@ export default function Navbar() {
 
   useEffect(() => {
     searchArtists();
-  }, [searchKey]);
+  }, [searchText]);
 
   const renderArtists = () => {
     return artists.map((artist) => (
@@ -54,7 +54,7 @@ export default function Navbar() {
       <Container>
         <div className="search__bar">
           <form onSubmit={searchArtists}>
-            <input type="text" onChange={(e) => setSearchKey(e.target.value)} />
+            <input type="text" onChange={(e) => setSearchText(e.target.value)} />
           </form>
         </div>
         <div className="avatar">
@@ -64,7 +64,7 @@ export default function Navbar() {
           </a>
         </div>
       </Container>
-      {searchKey ? renderArtists() : null}
+      {searchText ? renderArtists() : null}
     </>
   );
 }

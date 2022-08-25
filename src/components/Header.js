@@ -9,7 +9,6 @@ export default function Header() {
     <Container>
       <nav>
         <ul>
-          <li className="Accueil">Accueil</li>
           <li>
             <button type="button" onClick={handleClick}>
               Je me connecte
@@ -56,9 +55,5 @@ const Container = styled.div`
     font-size: 1.4rem;
     cursor: pointer;
   }
-  @media screen (and max-width: 700px) {
-    .block{
-        display:none;
-    }
-  }
+
 `;
