@@ -17,7 +17,6 @@ export default function Sidebar() {
   return (
     <Container>
       <div className="top__links">
-        <img src={spotify} alt="logo" />
         <div className="logo">
           <Lottie options={defaultOptions} height={200} max-width={190} />
         </div>
