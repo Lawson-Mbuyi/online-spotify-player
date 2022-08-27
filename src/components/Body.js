@@ -8,7 +8,8 @@ import { AiFillClockCircle } from "react-icons/ai";
 import { GetUserValue } from "../utilities/UserProvider";
 
 export default function Body() {
-  const [{ token, selectedPlaylist, selectedPlaylistId }, dispatch] = GetUserValue();
+  const [{ token, selectedPlaylist, selectedPlaylistId, contextUri }, dispatch] =
+    GetUserValue();
 
   useEffect(() => {
     const getInitialPlaylist = async () => {
@@ -21,6 +22,7 @@ export default function Body() {
           },
         },
       );
+
       const selectedPlaylist = {
         id: response.data.id,
         name: response.data.name,
@@ -43,45 +45,13 @@ export default function Body() {
         type: "SET_PLAYLIST",
         selectedPlaylist,
       });
+      dispatch({
+        type: "SET_PLAYLIST",
+        selectedPlaylist,
+      });
     };
     getInitialPlaylist();
-  }, [token, dispatch, selectedPlaylistId]);
-  const playTrack = async (id, name, artists, image, contextUri, trackNumber) => {
-    const response = await axios.put(
-      "https://api.spotify.com/v1/me/player/play",
-      {
-        contextUri,
-        offset: {
-          position: trackNumber + 1,
-        },
-        position_ms: 0,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    if (response.status === 204) {
-      const currentPlaying = {
-        id,
-        name,
-        artists,
-        image,
-      };
-      dispatch({
-        type: "SET_PLAYING",
-        currentPlaying,
-      });
-      dispatch({
-        type: "SET_PLAYER_STATE",
-        playerState: true,
-      });
-    } else {
-      dispatch({ type: "SET_PLAYER_STATE", playerState: true });
-    }
-  };
+  }, [token, dispatch, selectedPlaylistId, contextUri]);
   const msToMinutesAndSeconds = (ms) => {
     const minutes = Math.floor(ms / 60000);
     const seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -96,7 +66,7 @@ export default function Body() {
               <img src={selectedPlaylist.image} alt="selected playlist" />
             </div>
             <div className="details">
-              <span className="type">PLAYLIST</span>
+              <span className="type">DAYLY DISCOVER</span>
               <h1 className="title">{selectedPlaylist.name}</h1>
               <p className="description">{selectedPlaylist.description}</p>
             </div>
@@ -120,17 +90,17 @@ export default function Body() {
             </div>
             <div className="tracks">
               {selectedPlaylist.tracks.map(
-                (
-                  { id, name, artists, image, duration, album, contextUri, trackNumber },
-                  index,
-                ) => {
+                ({ id, name, artists, image, duration, album, contextUri }, index) => {
                   return (
                     <div
                       className="row"
                       key={id}
-                      onClick={() =>
-                        playTrack(id, name, artists, image, contextUri, trackNumber)
-                      }
+                      onClick={() => {
+                        dispatch({
+                          type: "SET_CONTEXT_URI",
+                          contextUri,
+                        });
+                      }}
                     >
                       <div className="col">
                         <span>{index + 1}</span>

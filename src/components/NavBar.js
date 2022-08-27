@@ -23,7 +23,6 @@ export default function Navbar() {
     });
     setArtists(data.artists.items);
   };
-
   useEffect(() => {
     dispatch({
       type: "SET_TOKEN",
@@ -39,9 +38,7 @@ export default function Navbar() {
     return artists.map((artist) => (
       <Data>
         <div key={artist.id}>
-          {artist.images.length ? (
-            <img width="20%" src={artist.images[0].url} alt="" />
-          ) : null}
+          {artist.images.length ? <img src={artist.images[0].url} alt="" /> : null}
           <span>{artist.name}</span>
         </div>
       </Data>
@@ -78,7 +75,7 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   transition: 0.3s ease-in-out;
-  background-color:;
+  background-color: ;
   .search__bar {
     background-color: white;
     width: 30%;
@@ -120,11 +117,25 @@ const Container = styled.div`
       }
     }
   }
-  .artists {
-    display
-  }
 `;
-const Data = styled.p`
-  display: inline-flex;
-  width: 500 em;
+const Data = styled.div`
+  position: relative;
+  width: 500px;
+  padding: 15px;
+  margin: auto;
+
+  img {
+    width: 400px;
+    heigth: 400px;
+  }
+  span {
+    position: absolute;
+    top: 30px;
+    left: 26px;
+    color: #ffffff;
+    background-color: #2f2e41;
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
+  }
 `;

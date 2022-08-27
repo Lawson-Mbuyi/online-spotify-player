@@ -1,26 +1,45 @@
+import { useEffect } from "react";
 import styled from "styled-components";
-import CurrentMusic from "./CurrentMusic";
-import MusicController from "./MusicController";
-import Volume from "./Volume";
+import SpotifyPlayer from "react-spotify-web-playback";
+import { GetUserValue } from "../utilities/UserProvider";
 
 export default function Footer() {
+  const [{ token, contextUri }, dispatch] = GetUserValue();
+  useEffect(() => {
+    dispatch({
+      type: "SET_CONTEXT_URI",
+      contextUri,
+    });
+  }, [token, contextUri]);
+
   return (
     <Container>
-      <CurrentMusic />
-      <MusicController />
-      <Volume />
+      <header className="player">
+        <SpotifyPlayer
+          token={token}
+          uris={[`${contextUri}`]}
+          styles={{
+            activeColor: "#fff",
+            bgColor: "#333",
+            color: "#fff",
+            loaderColor: "#fff",
+            sliderColor: "#1cb954",
+            trackArtistColor: "#ccc",
+            trackNameColor: "#fff",
+          }}
+        />
+      </header>
     </Container>
   );
 }
 
 const Container = styled.div`
-  height: 100%;
-  width: 100%;
-  background-color: #181818;
-  border-top: 1px solid #282828;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  padding: 20px;
+  height: 65px;
+  width: 97%;
+  background-color: #282828;
 `;

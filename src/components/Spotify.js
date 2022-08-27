@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
