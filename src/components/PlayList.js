@@ -1,22 +1,24 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GetUserValue } from "../utilities/UserProvider";
 
 export default function Playlists() {
   const [{ token, playlists }, dispatch] = GetUserValue();
+  const [items, setItems] = useState([]);
   useEffect(() => {
     const getPlaylist = async () => {
-      const response = await axios.get("https://api.spotify.com/v1/me/playlists/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+      const response = await axios.get(
+        `https://api.spotify.com/v1/browse/featured-playlists/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         },
-      });
-      const { playlistObjects } = response.data;
-      const playlists = playlistObjects.map(({ name, id }) => {
-        return { name, id };
-      });
+      );
+      setItems(response.data.playlists.items);
+
       dispatch({ type: "SET_PLAYLISTS", playlists });
     };
     getPlaylist();
@@ -27,7 +29,7 @@ export default function Playlists() {
   return (
     <Container>
       <ul>
-        {playlists.map(({ name, id }) => {
+        {items.map(({ name, id }) => {
           return (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
             <li key={id} onClick={() => changPlaylist(id)}>

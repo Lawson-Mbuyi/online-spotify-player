@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import styled from "styled-components";
 import Lottie from "react-lottie";
-import playing from "./playing.json";
+import music_gal from "./music_gal.json";
 // eslint-disable-next-line import/no-cycle
 import Header from "./Header";
 
@@ -9,7 +9,7 @@ export default function Login() {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: playing,
+    animationData: music_gal,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -29,6 +29,10 @@ export default function Login() {
       "user-read-currently-playing",
       "user-read-recently-played",
       "user-top-read",
+      "playlist-read-collaborative",
+      "playlist-modify-public",
+      "playlist-read-private",
+      "playlist-modify-private",
     ];
     window.location.href = `${api_url}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope.join(
       " ",
@@ -40,12 +44,12 @@ export default function Login() {
       <Content>
         <p>
           Toutes les musiques du monde avec tous les artistes de renommé mondiale c est
-          ici avec ONELINE-SPOTIFY-PLAYER
+          ici avec Strimming-App
         </p>
         <button type="button" onClick={handleClick}>
-          Ouvrir
+          Je me connecte
         </button>
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Lottie options={defaultOptions} height={400} max-width={400} />
       </Content>
     </Container>
   );
@@ -54,13 +58,12 @@ export default function Login() {
 const Container = styled.nav`
   width: 100%;
   heigth: 100vh;
+  margin: auto;
   background-color: #2f2e41;
 `;
 const Content = styled.div`
-  margin: 60px;
   width: 65%;
-  height: 90vh;
-  overflow-y: overlay;
+  heigth:100vh;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -68,14 +71,9 @@ const Content = styled.div`
   flex-direction: column;
   background: linear-gradient(transparent, #4F4C6B);
   background-color: rgb(91, 87, 115);
-  gap: 2rem;
-
-  img {
-    height: 20vh;
-    width: 400px;
-  }
+  
   button {
-    padding: 1rem 3rem;
+    padding: 1rem 2rem;
     border-radius: 5rem;
     background-color: #5931ba;
     color: #fff;
@@ -87,15 +85,16 @@ const Content = styled.div`
     p {
       max-width: 428px;
       min-width: 250px;
-      font-size: 16px;
-      margin: 15px;
+      font-size: 14px;
+      margin-top: 25px;
+      padding: 15px;
       text-align: center;
     }
   }
   p {
-    max-width: 428px;
+    max-width: 550px;
     heigth: 125px;
-    font-size: 20px;
+    font-size: 30px;
     color white;
     paddind: 5px;
     text-align: center;

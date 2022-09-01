@@ -34,12 +34,11 @@ export default function Footer() {
 }
 
 const Container = styled.div`
-  position: fixed;
   display: flex;
-  justify-content: space-between;
-  bottom: 0;
-  padding: 20px;
+  justify-content: center;
+  width: 100%;
   height: 65px;
-  width: 97%;
+  padding: 20px;
   background-color: #282828;
+  bottom: 0;
 `;

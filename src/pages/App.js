@@ -16,5 +16,6 @@ export default function App() {
     }
     document.title = "Online Spotify Player";
   }, [dispatch, token]);
+
   return <div>{token ? <Spotify /> : <Login />}</div>;
 }

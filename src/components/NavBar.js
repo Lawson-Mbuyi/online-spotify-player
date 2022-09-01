@@ -1,4 +1,7 @@
 /* eslint-disable react/prop-types */
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -8,11 +11,11 @@ import { GetUserValue } from "../utilities/UserProvider";
 export default function Navbar() {
   const [searchText, setSearchText] = useState("");
   const [artists, setArtists] = useState([]);
-  const [{ token }, dispatch] = GetUserValue();
+  const [{ token, contextUri }, dispatch] = GetUserValue();
 
   const searchArtists = async (e) => {
     e.preventDefault();
-    const { data } = await axios.get("https://api.spotify.com/v1/search", {
+    const response = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -21,28 +24,49 @@ export default function Navbar() {
         type: "artist",
       },
     });
-    setArtists(data.artists.items);
+    setArtists(response.data.artists.items);
   };
   useEffect(() => {
-    dispatch({
-      type: "SET_TOKEN",
-      token,
-    });
-  }, [token, dispatch]);
-
-  useEffect(() => {
     searchArtists();
-  }, [searchText]);
+  }, [token, searchText, contextUri, dispatch]);
 
   const renderArtists = () => {
-    return artists.map((artist) => (
+    return (
       <Data>
-        <div key={artist.id}>
-          {artist.images.length ? <img src={artist.images[0].url} alt="" /> : null}
-          <span>{artist.name}</span>
+        <div className="block">
+          {artists ? (
+            artists.map((artist) => (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+              <ul
+                key={artist.id}
+                onClick={() => {
+                  dispatch({
+                    type: "SET_CONTEXT_URI",
+                    contextUri: artist.uri,
+                  });
+                }}
+              >
+                {artist.images.length ? (
+                  <li>
+                    <img src={artist.images[0].url} alt="" width={300} />
+                  </li>
+                ) : null}
+                <li>
+                  <span>{artist.name}</span>
+                </li>
+              </ul>
+            ))
+          ) : (
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          )}
         </div>
       </Data>
-    ));
+    );
   };
 
   const [{ userInfo }] = GetUserValue();
@@ -57,7 +81,7 @@ export default function Navbar() {
         <div className="avatar">
           <a href={userInfo?.userUrl}>
             <CgProfile />
-            <span>{userInfo?.name}</span>
+            <span>{userInfo?.name.substring(0, 3)}</span>
           </a>
         </div>
       </Container>
@@ -119,23 +143,15 @@ const Container = styled.div`
   }
 `;
 const Data = styled.div`
-  position: relative;
-  width: 500px;
-  padding: 15px;
-  margin: auto;
-
-  img {
-    width: 400px;
-    heigth: 400px;
+  .block {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    cursor: pointer;
   }
-  span {
-    position: absolute;
-    top: 30px;
-    left: 26px;
+  .block ul {
+    list-style-type: none;
+    font-size: larger;
     color: #ffffff;
-    background-color: #2f2e41;
-    font-size: 20px;
-    text-align: center;
-    padding: 5px;
   }
 `;

@@ -7,7 +7,7 @@ import SideBar from "./SideBar";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import { GetUserValue } from "../utilities/UserProvider";
-import Body from "./Body";
+import Main from "./Main";
 
 export default function Spotify() {
   const [{ token }, dispatch] = GetUserValue();
@@ -31,33 +31,19 @@ export default function Spotify() {
     };
     getUserInfo();
   }, [dispatch, token]);
-  useEffect(() => {
-    const getPlaybackState = async () => {
-      const { data } = await axios.get("https://api.spotify.com/v1/me/player", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      dispatch({
-        type: "SET_PLAYER_STATE",
-        playerState: data.is_playing,
-      });
-    };
-    getPlaybackState();
-  }, [dispatch, token]);
+
   return (
     <Container>
-      <div className="spotify__body">
+      <div className="body_content">
         <SideBar />
         <div className="body">
           <NavBar />
           <div className="body__contents">
-            <Body />
+            <Main />
           </div>
         </div>
       </div>
-      <div className="spotify__footer">
+      <div className="footer_content">
         <Footer />
       </div>
     </Container>
@@ -70,7 +56,7 @@ const Container = styled.div`
   overflow: hidden;
   display: grid;
   grid-template-rows: 85vh 15vh;
-  .spotify__body {
+  .body_content {
     display: grid;
     grid-template-columns: 15vw 85vw;
     height: 100%;

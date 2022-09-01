@@ -1,0 +1,12 @@
+
+.main-content {
+  display: flex;
+  flex-flow:row wrap;
+  justify-content: center;
+  cursor: pointer;
+}
+.main-content ul{
+    list-style-type: none;
+    font-size: larger;
+    color: #ffffff;
+}
