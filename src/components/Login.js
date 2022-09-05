@@ -16,10 +16,12 @@ export default function Login() {
   };
 
   const handleClick = async () => {
-    // const client_id = "ae8b66ff18714363903cfa63fbe6bce6";
-    // const redirect_uri = "http://localhost:3000/callback/";
-    const client_id = "4b4f1a9eeaf24cd688bf9fb8ce98411e";
-    const redirect_uri = "https://online-spotify-player.vercel.app/callback/";
+    const client_id = process.env.REACT_APP_CLIENT_ID;
+    let redirect_uri = process.env.REACT_APP_DEV_REDIRECT_URI;
+    console.log(redirect_uri);
+    if (process.env.NODE_ENV === "production") {
+      redirect_uri = process.env.REACT_APP_PRO_REDIRECT_URI;
+    }
     const api_url = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
