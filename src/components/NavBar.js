@@ -57,10 +57,7 @@ export default function Navbar() {
               </ul>
             ))
           ) : (
-            <Backdrop
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open
-            >
+            <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
               <CircularProgress color="inherit" />
             </Backdrop>
           )}
@@ -99,7 +96,6 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   transition: 0.3s ease-in-out;
-  background-color: ;
   .search__bar {
     background-color: white;
     width: 30%;

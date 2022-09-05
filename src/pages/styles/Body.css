@@ -10,3 +10,9 @@
     font-size: larger;
     color: #ffffff;
 }
+.smartDisplayIcon{
+ position: relative;
+  top: 50%;
+  left: 100px;
+  width: 200px;
+}

@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../components/Login";
 import Spotify from "../components/Spotify";
 import { GetUserValue } from "../utilities/UserProvider";
+import PlayList from "./Playlist";
 
 export default function App() {
   const [{ token }, dispatch] = GetUserValue();
@@ -14,8 +15,19 @@ export default function App() {
         dispatch({ type: "SET_TOKEN", token });
       }
     }
-    document.title = "Online Spotify Player";
+    document.title = "Streaming-App";
   }, [dispatch, token]);
 
-  return <div>{token ? <Spotify /> : <Login />}</div>;
+  return (
+    <Router>
+      <Routes>
+        {token ? (
+          <Route path="/callback/*" element={<Spotify />} />
+        ) : (
+          <Route path="/" element={<Login />} />
+        )}{" "}
+        <Route path="/playlist/:playlistId" element={<PlayList />} />
+      </Routes>
+    </Router>
+  );
 }

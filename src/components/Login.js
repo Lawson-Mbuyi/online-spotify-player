@@ -16,10 +16,10 @@ export default function Login() {
   };
 
   const handleClick = async () => {
-    // const client_id = "ae8b66ff18714363903cfa63fbe6bce6";
-    // const redirect_uri = "http://localhost:3000/callback/";
-    const client_id = "4b4f1a9eeaf24cd688bf9fb8ce98411e";
-    const redirect_uri = "https://online-spotify-player.vercel.app/callback/";
+    const client_id = "ae8b66ff18714363903cfa63fbe6bce6";
+    const redirect_uri = "http://localhost:3000/callback/";
+    // const client_id = "4b4f1a9eeaf24cd688bf9fb8ce98411e";
+    // const redirect_uri = "https://online-spotify-player.vercel.app/callback/";
     const api_url = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
@@ -41,16 +41,16 @@ export default function Login() {
   return (
     <Container>
       <Header />
-      <Content>
+      <header>
         <p>
-          Toutes les musiques du monde avec tous les artistes de renommé mondiale c est
-          ici avec Strimming-App
+          Toutes les musiques du monde avec tous les artistes de renommé mondiale c est ici avec
+          Strimming-App
         </p>
         <button type="button" onClick={handleClick}>
           Je me connecte
         </button>
         <Lottie options={defaultOptions} height={400} max-width={400} />
-      </Content>
+      </header>
     </Container>
   );
 }
@@ -60,18 +60,17 @@ const Container = styled.nav`
   heigth: 100vh;
   margin: auto;
   background-color: #2f2e41;
-`;
-const Content = styled.div`
-  width: 65%;
-  heigth:100vh;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: linear-gradient(transparent, #4F4C6B);
-  background-color: rgb(91, 87, 115);
-  
+
+  header {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #4f4c6b;
+  }
+
   button {
     padding: 1rem 2rem;
     border-radius: 5rem;
@@ -81,7 +80,7 @@ const Content = styled.div`
     font-size: 1.4rem;
     cursor: pointer;
   }
-  @media screen (and max-width:700px){
+  @media screen (and max-width: 700px) {
     p {
       max-width: 428px;
       min-width: 250px;
@@ -90,12 +89,14 @@ const Content = styled.div`
       padding: 15px;
       text-align: center;
     }
+    header {
+      width: 100%;
+    }
   }
   p {
     max-width: 550px;
-    heigth: 125px;
-    font-size: 30px;
-    color white;
+    font-size: 25px;
+    color: #ffffff;
     paddind: 5px;
     text-align: center;
   }

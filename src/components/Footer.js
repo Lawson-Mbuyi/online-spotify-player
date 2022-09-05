@@ -10,7 +10,7 @@ export default function Footer() {
       type: "SET_CONTEXT_URI",
       contextUri,
     });
-  }, [token, contextUri]);
+  }, [token, contextUri, dispatch]);
 
   return (
     <Container>
@@ -34,11 +34,13 @@ export default function Footer() {
 }
 
 const Container = styled.div`
+  position: fix;
+  bottom: 0;
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 65px;
+  height: 75px;
   padding: 20px;
-  background-color: #282828;
-  bottom: 0;
+  background: linear-gradient(transparent, rgba(0.5, 0.4, 0.5, 1));
+  background-color: #2f2e41;
 `;

@@ -1,39 +1,48 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GetUserValue } from "../utilities/UserProvider";
 
 export default function Playlists() {
-  const [{ token, playlists }, dispatch] = GetUserValue();
-  const [items, setItems] = useState([]);
+  const [{ token, playlistId }, dispatch] = GetUserValue();
+  const [playlists, setPlaylists] = useState([]);
+  const userId = "31awd7pstcisiavoihqcf74ve5lm";
+  // eslint-disable-next-line no-template-curly-in-string
   useEffect(() => {
     const getPlaylist = async () => {
-      const response = await axios.get(
-        `https://api.spotify.com/v1/browse/featured-playlists/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+      const response = await axios.get(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-      );
-      setItems(response.data.playlists.items);
-
-      dispatch({ type: "SET_PLAYLISTS", playlists });
+      });
+      setPlaylists(response.data.items);
     };
     getPlaylist();
-  }, [token, dispatch]);
-  const changPlaylist = (selectedPlaylistId) => {
-    dispatch({ type: "SET_PLAYLIST_ID", selectedPlaylistId });
-  };
+  }, [token, playlistId, dispatch]);
+
   return (
     <Container>
       <ul>
-        {items.map(({ name, id }) => {
+        {playlists.map(({ name, id }) => {
           return (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
-            <li key={id} onClick={() => changPlaylist(id)}>
-              {name}
+            <li
+              key={id}
+              onClick={() => {
+                dispatch({
+                  type: "SET_PLAYLIST_ID",
+                  playlistId: id,
+                });
+              }}
+            >
+              <Link
+                to={`/playlist/${playlistId}`}
+                style={{ textDecoration: "none", color: "#b3b3b3" }}
+              >
+                {name}
+              </Link>
             </li>
           );
         })}
@@ -68,5 +77,8 @@ const Container = styled.div`
         color: white;
       }
     }
+  }
+  Link {
+    text-decoration: none;
   }
 `;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import { MdHomeFilled } from "react-icons/md";
@@ -5,13 +6,19 @@ import Star from "./Star.png";
 import Playlist from "./PlayList";
 
 export default function Sidebar() {
+  const [isHidden, setIsHidden] = useState(false);
+  const hideHandler = () => {
+    setIsHidden(!isHidden);
+  };
   return (
     <Container>
       <img width="100" src={Star} alt="logo" />
-      <div className="menu">
-        <DehazeIcon />
-      </div>
-
+      <DehazeIcon
+        className="menu"
+        onClick={() => {
+          hideHandler();
+        }}
+      />
       <div className="sideBarLink">
         <span>Streaming-App</span>
         <ul>
@@ -39,8 +46,6 @@ const Container = styled.div`
   }
   .sideBarLink {
     color: #b3b3b3;
-    display: flex;
-    flex-flow: row wrap;
   }
   ul {
     list-style-type: none;
@@ -50,7 +55,6 @@ const Container = styled.div`
     padding: 1rem;
   }
   li :hover {
-    display: flex;
     gap: 1rem;
     cursor: pointer;
     transition: 0.3s ease-in-out;
@@ -58,15 +62,17 @@ const Container = styled.div`
   }
   @media screen and (max-width: 700px) {
     .sideBarLink {
-      display: none;
+      display: ${({ isHidden }) => (isHidden ? "block" : "none")};
     }
     img {
       width: 60px;
       paddind: 5px;
+      margin: auto;
     }
     .menu {
       display: block;
       cursor: pointer;
+      padding: 15px;
     }
   }
 `;

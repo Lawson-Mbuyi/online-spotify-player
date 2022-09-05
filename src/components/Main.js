@@ -1,3 +1,4 @@
+import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
@@ -11,7 +12,7 @@ export default function Main() {
 
   useEffect(() => {
     const GetTopReleases = async () => {
-      const response = await axios.get(`https://api.spotify.com/v1/browse/new-releases`, {
+      const response = await axios.get("https://api.spotify.com/v1/browse/new-releases", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -44,6 +45,7 @@ export default function Main() {
               });
             }}
           >
+            <SmartDisplayIcon className="smartDisplayIcon" />
             <li>
               <img src={track.images[0].url} alt="avatar" width={300} />
             </li>

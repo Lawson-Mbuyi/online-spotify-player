@@ -19,12 +19,6 @@ const reducer = (state, action) => {
         ...state,
         userInfo: action.userInfo,
       };
-    case "SET_PLAYLISTS":
-      return {
-        ...state,
-        playlists: action.playlists,
-      };
-
     case "SET_PLAYLIST":
       return {
         ...state,
@@ -33,7 +27,7 @@ const reducer = (state, action) => {
     case "SET_PLAYLIST_ID":
       return {
         ...state,
-        selectedPlaylistId: action.selectedPlaylistId,
+        playlistId: action.playlistId,
       };
     case "SET_CONTEXT_URI":
       return {
